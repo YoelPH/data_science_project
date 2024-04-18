@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt 
 
-data = pd.read_csv(r"C:\Users\Jasmine\Desktop\data_science_project\dementia_patients_health_data.csv", sep=',')
+data = pd.read_csv(r"C:\Users\Jasmine\OneDrive\Documents\Uni\FS2024\Data_science\dementia_patients_health_data.csv", sep=',')
 
 ##### DATA EXPLORATION #####
 #print(data.head(10))
@@ -127,6 +127,11 @@ presc_perc = presc_count/presc_count.sum() * 100
 #119 Rivastigmine = 51.5%
 #515 no prescription = 11.9% 
 
+dementia_data = data[data["Dementia"] == 1]
+dem_pres_count = dementia_data["Prescription"].value_counts()
+#print(dementia.sum())
+#print(dem_pres_count)
+
 #plotting distribution of dosages of the 4 medications  
 prescriptions = data["Prescription"].unique()
 # Create subplots
@@ -202,8 +207,8 @@ plt.show()
 #bad sleep: 534 = 53.4%
 
 ##cognitive ##
-fix, axs = plt.subplots(3,1, figsize=(10,12))
-columns = ["Dementia", "Depression_Status", "Cognitive_Test_Scores"]
+fix, axs = plt.subplots(4,1, figsize=(10,12))
+columns = ["Dementia", "Depression_Status", "Cognitive_Test_Scores", "Education_Level"]
 for i, col in enumerate(columns): 
     count = data[col].value_counts()
     perc = count / count.sum() * 100 
@@ -215,8 +220,16 @@ for i, col in enumerate(columns):
 plt.tight_layout()
 plt.show()
 
+dementia_gender = dementia_data["Gender"].value_counts()
+print(dementia_gender)
 #no dementia: 515 = 51.5% 
 #dementia: 485 = 48.5% 
 
 #depression: 245 = 24.5% 
 #no depression: 755 = 75.5% 
+
+#primary school: 389 = 39.9% 
+#secondary school: 304 = 30.4% 
+#no school: 155 = 15.5% 
+#dimploma / degree: 152 = 15.2% 
+    
